@@ -1,0 +1,3 @@
+- insert:
+    - id: notion-local-tools-adapter
+      name: dsh-notion-local-tools
