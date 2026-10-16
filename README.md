@@ -36,7 +36,7 @@ dsh plugin --profile web exec dsh-notion-local-tools
 
 按提示依次输入 **notion2api 请求地址** 和 **API key**。地址例如 `https://your-gateway.example/v1`，完整的 `/v1/chat/completions` 地址也可以。密钥输入不回显，不放在命令参数或终端历史中。然后浏览器会打开 DSH：选择自己的工作区，在模型菜单选择 **Notion · 本地工具 → Sonnet 5.5 / Opus 5.5** 即可。
 
-**每次启动都使用这条向导命令并重新输入地址和密钥。** 密钥仅用于本次 DSH 进程的环境，不持久写入凭据文件。地址只存于权限受限的临时 overlay，服务退出时清理；异常断电可能留下只含地址的临时文件。使用其他 profile 时，内外两处名称都要替换，例如 `dsh plugin --profile custom exec dsh-notion-local-tools --dsh-profile custom`。需要改端口时，在命令末尾添加 `--port 3085`。不要一边运行旧服务，一边启动同端口的新服务。`dsh plugin exec` 在运行期间会持有该 profile 的插件管理锁；安装、升级或卸载其他插件前，先按 Ctrl+C 停止向导服务。
+**每次启动都使用这条向导命令并重新输入地址和密钥。** 密钥仅用于本次 DSH 进程的环境，不持久写入凭据文件。地址只存于权限受限的临时 overlay，向导在退出时尝试清理；插件管理器中断、强退或断电可能留下只含地址的临时文件（系统临时目录中的 `dsh-notion-local-tools-*`），可在停止服务后删除。使用其他 profile 时，内外两处名称都要替换，例如 `dsh plugin --profile custom exec dsh-notion-local-tools --dsh-profile custom`。需要改端口时，在命令末尾添加 `--port 3085`。不要一边运行旧服务，一边启动同端口的新服务。`dsh plugin exec` 在运行期间会持有该 profile 的插件管理锁；安装、升级或卸载其他插件前，先按 Ctrl+C 停止向导服务。
 
 DSH 0.2.0-rc.2 的“设置 → 模型”能显示第三方提供商，但其编辑表单只支持内置提供商；因此本版通过向导配置，不要求在该表单填写密钥。插件不会替你切换默认模型、放开文件权限或取消审批。工作目录、文件权限与审批仍由 DSH 管理。旧手工路径版需要先停用，避免同名提供方重复注册。
 
