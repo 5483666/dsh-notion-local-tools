@@ -9,26 +9,16 @@
 将下面整段复制给你电脑上的编程 agent。请求地址和 API key 留到本机启动向导中输入，不需要写进这段提示词或发到聊天里。
 
 ```text
-请帮我在当前电脑安装并验收这个 DSH 插件：
+请按以下仓库的 README，在我的电脑上安装并验收 DSH 插件：
 https://github.com/5483666/dsh-notion-local-tools
 
-先阅读仓库最新 README，再检查本机系统、Node.js、DSH 版本和实际使用的 profile。本版要求 Node.js 22.22+、DSH 0.2.0-rc.2；不兼容时先说明，不要绕过版本检查或擅自升级现有 DSH。profile 无法确定时再问我。
+先核对 Node.js、DSH 版本和实际使用的 profile，安装预打包 Release；不兼容时先说明。保留现有配置与默认模型，修改前备份，避免旧版重复注册和中断正在运行的任务。
 
-保留现有模型、默认选择、工作区权限和其他插件。修改配置前备份，不覆盖整个配置文件。若已有旧手工版 notion-local-tools-adapter，避免重复注册；不要中断正在进行的任务。
+按 README 启动交互式向导，让我在本机自行输入请求地址和 API key，不要要求我发到聊天里，也不要记录或公开这些信息。
 
-通过 DSH 插件管理器安装预打包 Release。以下以 web profile 为例，请按实际 profile 替换：
-dsh plugin --profile web add "https://github.com/5483666/dsh-notion-local-tools/releases/download/v0.1.0/dsh-notion-local-tools-0.1.0.tgz"
+确认能选择“Notion · 本地工具”的 Sonnet 5.5 / Opus 5.5。用独立测试文件，让 Sonnet 通过 DSH 的 read → write → read 完成读写；模型不用 shell。独立核对输入、输出字节一致，包括末尾换行。
 
-安装后检查插件加载及依赖情况，准备好本机交互式终端，让我自行输入请求地址和 API key：
-dsh plugin --profile web exec dsh-notion-local-tools
-如果使用 custom profile，完整启动命令是：
-dsh plugin --profile custom exec dsh-notion-local-tools --dsh-profile custom
-
-同一 profile 的旧 Web 服务需要协调停止后再启动，避免端口冲突。不要让我把请求地址或 API key 发到聊天里，不要将它们写入仓库、日志、截图、命令参数或提交记录。密钥输入不回显，向导每次启动都需重新输入地址和密钥。不要在 DSH 当前第三方模型只读设置表单里反复尝试填写。
-
-启动后确认可选择“Notion · 本地工具”的 Sonnet 5.5 / Opus 5.5。用独立测试目录生成含随机文字的 input.txt，让 Sonnet 5.5 通过真实 DSH 工具执行 read → write → read，生成 output.txt，保留末尾换行；模型不得使用 shell 或操作其他文件。最后独立比较两个文件的实际字节，不要仅凭模型声称成功。
-
-最后告诉我安装到哪个 profile、如何再次启动、验收结果与尚未验证的部分。若无法完成真实调用，明确说明卡在哪里，不把安装成功当作读写通过。不连接或修改远程 VPS，不安装 NewAPI/Sub2API，不修改 443。
+最后告诉我安装的 profile、下次启动命令和实际验收结果；未完成的部分如实说明。
 ```
 
 ## 安装
