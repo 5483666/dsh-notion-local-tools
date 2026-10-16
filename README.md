@@ -4,6 +4,33 @@
 
 默认提供 **Sonnet 5.5** 与 **Opus 5.5**。插件不包含任何人的服务器地址、API key、Notion cookie、私人会话或测试文件。它也不会在远程服务器上安装服务。
 
+## 复制以下内容给 agent 安装
+
+将下面整段复制给你电脑上的编程 agent。请求地址和 API key 留到本机启动向导中输入，不需要写进这段提示词或发到聊天里。
+
+```text
+请帮我在当前电脑安装并验收这个 DSH 插件：
+https://github.com/5483666/dsh-notion-local-tools
+
+先阅读仓库最新 README，再检查本机系统、Node.js、DSH 版本和实际使用的 profile。本版要求 Node.js 22.22+、DSH 0.2.0-rc.2；不兼容时先说明，不要绕过版本检查或擅自升级现有 DSH。profile 无法确定时再问我。
+
+保留现有模型、默认选择、工作区权限和其他插件。修改配置前备份，不覆盖整个配置文件。若已有旧手工版 notion-local-tools-adapter，避免重复注册；不要中断正在进行的任务。
+
+通过 DSH 插件管理器安装预打包 Release。以下以 web profile 为例，请按实际 profile 替换：
+dsh plugin --profile web add "https://github.com/5483666/dsh-notion-local-tools/releases/download/v0.1.0/dsh-notion-local-tools-0.1.0.tgz"
+
+安装后检查插件加载及依赖情况，准备好本机交互式终端，让我自行输入请求地址和 API key：
+dsh plugin --profile web exec dsh-notion-local-tools
+如果使用 custom profile，完整启动命令是：
+dsh plugin --profile custom exec dsh-notion-local-tools --dsh-profile custom
+
+同一 profile 的旧 Web 服务需要协调停止后再启动，避免端口冲突。不要让我把请求地址或 API key 发到聊天里，不要将它们写入仓库、日志、截图、命令参数或提交记录。密钥输入不回显，向导每次启动都需重新输入地址和密钥。不要在 DSH 当前第三方模型只读设置表单里反复尝试填写。
+
+启动后确认可选择“Notion · 本地工具”的 Sonnet 5.5 / Opus 5.5。用独立测试目录生成含随机文字的 input.txt，让 Sonnet 5.5 通过真实 DSH 工具执行 read → write → read，生成 output.txt，保留末尾换行；模型不得使用 shell 或操作其他文件。最后独立比较两个文件的实际字节，不要仅凭模型声称成功。
+
+最后告诉我安装到哪个 profile、如何再次启动、验收结果与尚未验证的部分。若无法完成真实调用，明确说明卡在哪里，不把安装成功当作读写通过。不连接或修改远程 VPS，不安装 NewAPI/Sub2API，不修改 443。
+```
+
 ## 安装
 
 本版已按 **DSH 0.2.0-rc.2 / Node.js 22.22+** 制作；先运行 `dsh --version` 检查版本。不兼容时请使用匹配版本，不要绕过 DSH 的版本检查。
